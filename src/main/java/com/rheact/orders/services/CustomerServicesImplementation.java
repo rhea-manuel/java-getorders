@@ -2,6 +2,7 @@ package com.rheact.orders.services;
 
 import com.rheact.orders.models.Customer;
 import com.rheact.orders.repositories.CustomersRepository;
+import com.rheact.orders.views.OrderCounts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,5 +37,10 @@ public class CustomerServicesImplementation implements CustomerServices {
     public List<Customer> findByName(String name) {
         List<Customer> customers = customerrepos.findByCustnameContainingIgnoringCase(name);
         return customers;
+    }
+
+    @Override
+    public List<OrderCounts> orderCounts() {
+        return customerrepos.orderCounts();
     }
 }

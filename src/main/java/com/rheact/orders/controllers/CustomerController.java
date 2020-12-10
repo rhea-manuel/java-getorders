@@ -2,6 +2,7 @@ package com.rheact.orders.controllers;
 
 import com.rheact.orders.models.Customer;
 import com.rheact.orders.services.CustomerServices;
+import com.rheact.orders.views.OrderCounts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,5 +36,11 @@ public class CustomerController {
     public ResponseEntity<?> findCustomerbyId(@PathVariable String name) {
         List<Customer> customers = customerService.findByName(name);
         return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/orders/count", produces = "application/json")
+    public ResponseEntity<?> countOrders(){
+        List<OrderCounts> counts = customerService.orderCounts();
+        return new ResponseEntity<>(counts, HttpStatus.OK);
     }
 }
